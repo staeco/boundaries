@@ -1,0 +1,76 @@
+{
+  "name": "boundaries",
+  "version": "2.0.0",
+  "description": "Source for all GeoJSON boundaries on Earth",
+  "main": "index.js",
+  "keywords": [
+    "geojson",
+    "polygon",
+    "multipolygon",
+    "json",
+    "convert",
+    "geospatial",
+    "civic",
+    "civil",
+    "zillow",
+    "neighborhood",
+    "zip code",
+    "city",
+    "state",
+    "census",
+    "acs",
+    "congressional"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/contra/boundaries.git"
+  },
+  "author": "Contra <yo@contra.io> (http://contra.io)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/contra/boundaries/issues"
+  },
+  "homepage": "https://github.com/contra/boundaries#readme",
+  "files": [
+    "files",
+    "README.md",
+    "index.js"
+  ],
+  "scripts": {
+    "preversion": "npm run build",
+    "build": "babel src --out-dir .",
+    "lint": "eslint src update",
+    "test": "npm run build && node test.js",
+    "update": "mkdir -p files tile38 && NODE_OPTIONS=--max_old_space_size=16000 DEBUG=census,neighborhoods babel-node --inspect update && npm run compress",
+    "compress": "GZIP=-9 tar -czvf tile38.tar.gz tile38/appendonly.aof && rm -rf tile38"
+  },
+  "devDependencies": {
+    "JSONStream": "^1.3.2",
+    "async": "^2.6.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-runtime": "^6.4.3",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-stage-0": "^6.3.13",
+    "camelcase": "^5.0.0",
+    "canada-boundaries": "^1.0.3",
+    "census-boundaries": "^2.0.5",
+    "eslint": "^5.1.0",
+    "eslint-cli": "^1.0.0",
+    "isoc": "0.0.1",
+    "neighborhood-boundaries": "^1.0.1",
+    "npm-which": "^3.0.1",
+    "process-streams": "^1.0.1",
+    "pump": "^3.0.0",
+    "slugify": "^1.2.9",
+    "superagent": "^3.8.2",
+    "through2": "^2.0.3",
+    "waoffle": "^1.1.2"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "graceful-fs": "^4.1.11"
+  }
+}
