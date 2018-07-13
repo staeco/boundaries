@@ -81,7 +81,7 @@ const aofStream = pumpify(
 )
 const writeAOF = (id, str) => {
   const cmd = [ 'set', 'boundaries', id, 'object', str ].join(' ')
-  return aofStream.write(`${cmd}\n`)
+  return aofStream.write(`${cmd}\r\n`)
 }
 const write = (boundary, cb) => {
   if (!boundary.properties.id) throw new Error('Missing id on write')
