@@ -1,6 +1,7 @@
 import censusImport from 'census-boundaries'
 import neighborhoodImport from 'neighborhood-boundaries'
 import canadaImport from 'canada-boundaries'
+import cp from 'child_process'
 import fs from 'graceful-fs'
 import path from 'path'
 import async from 'async'
@@ -10,9 +11,10 @@ import through from 'through2'
 import JSONStream from 'JSONStream'
 import isoc from 'isoc'
 import slugify from 'slugify'
-import ProcessStream from 'process-streams'
 import pump from 'pump'
 import nwhich from 'npm-which'
+import duplex from 'duplexify'
+import pumpify from 'pumpify'
 import { states as stateCodes, provinces as provinceCodes } from './codes'
 
 const writePath = path.join(__dirname, '../files')
@@ -71,14 +73,16 @@ const getCanadaType = (type, doc) => {
 }
 
 const which = nwhich(process.cwd())
-const ps = new ProcessStream()
-const aofStream = pump(
-  ps.spawn(which.sync('rwaoffle')),
+const rwaoffle = cp.spawn(which.sync('rwaoffle'))
+const aofTransform = duplex(rwaoffle.stdin, rwaoffle.stdout)
+const aofStream = pumpify(
+  aofTransform,
   fs.createWriteStream(aofPath)
 )
-const writeAOF = (id, str) =>
-  aofStream.write([ 'set', 'boundaries', id, 'object', str ].join(' '))
-
+const writeAOF = (id, str) => {
+  const cmd = [ 'set', 'boundaries', id, 'object', str ].join(' ')
+  return aofStream.write(`${cmd}\n`)
+}
 const write = (boundary, cb) => {
   if (!boundary.properties.id) throw new Error('Missing id on write')
   const fileName = path.join(writePath, `${boundary.properties.id}.geojson`)
@@ -202,7 +206,7 @@ const planets = (cb) => {
 const done = (err) => {
   if (err) return console.error(err)
   console.log('Done importing!')
-  aofStream.on('finish', () => process.exit(0))
+  aofStream.once('finish', () => process.exit(0))
   aofStream.end()
 }
 

@@ -57,12 +57,12 @@
     "camelcase": "^5.0.0",
     "canada-boundaries": "^1.0.3",
     "census-boundaries": "^2.0.5",
+    "duplexify": "^3.6.0",
     "eslint": "^5.1.0",
     "eslint-cli": "^1.0.0",
     "isoc": "0.0.1",
     "neighborhood-boundaries": "^1.0.1",
     "npm-which": "^3.0.1",
-    "process-streams": "^1.0.1",
     "pump": "^3.0.0",
     "slugify": "^1.2.9",
     "superagent": "^3.8.2",
@@ -71,6 +71,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
-    "graceful-fs": "^4.1.11"
+    "graceful-fs": "^4.1.11",
+    "pumpify": "^1.5.1"
   }
 }
