@@ -17,6 +17,7 @@ import { states as stateCodes, provinces as provinceCodes } from './codes'
 
 const writePath = path.join(__dirname, '../files')
 const aofPath = path.join(__dirname, '../tile38/appendonly.aof')
+const logPath = path.join(__dirname, '../tile38/commands.log')
 const countryUrl = 'https://unpkg.com/@geo-maps/countries-maritime-1m/map.geo.json'
 const earth = {
   type: 'Polygon',
@@ -74,8 +75,12 @@ const aofStream = pumpify.obj(
   aof(),
   fs.createWriteStream(aofPath)
 )
-const writeAOF = (id, str) =>
-  aofStream.write([ 'set', 'boundaries', id, 'object', str ])
+const logStream = fs.createWriteStream(logPath)
+const writeAOF = (id, str) => {
+  const cmd = [ 'set', 'boundaries', id, 'object', str ]
+  aofStream.write(cmd)
+  logStream.write(`${cmd.join(' ')}\r\n`)
+}
 
 const write = (boundary, cb) => {
   if (!boundary.properties.id) throw new Error('Missing id on write')
