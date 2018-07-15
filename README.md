@@ -40,7 +40,8 @@ Each boundary is a GeoJSON MultiPolygon. The properties object on each geometry 
 
 ## Accessing the boundaries
 
-You can clone the repo and read the files directly, or use the node module.
+- You can reference the files directly from github
+- You can install it as a node module (see below)
 
 ## Node Module
 
@@ -48,7 +49,7 @@ You can clone the repo and read the files directly, or use the node module.
 
 Due to size limits on npm, you'll have to install from github.
 
-`npm install contra/boundaries --save`
+`npm install github:contra/boundaries --save`
 
 If anything was able to land on NPM, it's outdated - don't use it.
 
