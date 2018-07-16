@@ -42,7 +42,7 @@
     "lint": "eslint src update",
     "test": "npm run build && node test.js",
     "update": "mkdir -p files tile38 && NODE_OPTIONS=--max_old_space_size=16000 DEBUG=census,neighborhoods babel-node --inspect update && npm run compress",
-    "compress": "GZIP=-9 tar -czvf tile38.tar.gz tile38/appendonly.aof && rm -rf tile38"
+    "compress": "GZIP=-9 tar -czvf tile38.tar.gz tile38/commands.log && rm -rf tile38"
   },
   "devDependencies": {
     "JSONStream": "^1.3.2",

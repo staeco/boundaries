@@ -71,14 +71,16 @@ const getCanadaType = (type, doc) => {
   return
 }
 
+/*
 const aofStream = pumpify.obj(
   aof(),
   fs.createWriteStream(aofPath)
 )
+*/
 const logStream = fs.createWriteStream(logPath)
 const writeAOF = (id, str) => {
   const cmd = [ 'set', 'boundaries', id, 'object', str ]
-  aofStream.write(cmd)
+  // aofStream.write(cmd)
   logStream.write(`${cmd.join(' ')}\r\n`)
 }
 
@@ -205,8 +207,8 @@ const planets = (cb) => {
 const done = (err) => {
   if (err) return console.error(err)
   console.log('Done importing!')
-  aofStream.once('finish', () => process.exit(0))
-  aofStream.end()
+  logStream.once('finish', () => process.exit(0))
+  logStream.end()
 }
 
 async.series([ planets, countries, neighborhoods, america, canada ], done)
