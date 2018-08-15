@@ -16,6 +16,7 @@ import aof from './aof'
 import { states as stateCodes, provinces as provinceCodes } from './codes'
 
 const writePath = path.join(__dirname, '../files')
+const customPath = path.join(__dirname, '../custom')
 const aofPath = path.join(__dirname, '../tile38/appendonly.aof')
 const logPath = path.join(__dirname, '../tile38/commands.log')
 const countryUrl = 'https://unpkg.com/@geo-maps/countries-maritime-1m/map.geo.json'
@@ -84,14 +85,28 @@ const writeAOF = (id, str) => {
   logStream.write(`${cmd.join(' ')}\r\n`)
 }
 
+const loadCustom = (id, cb) => {
+  const customName = path.join(customPath, `${id}.geojson`)
+  fs.readFile(customName, (err, data) => {
+    cb(null, data && JSON.parse(data))
+  })
+}
 const write = (boundary, cb) => {
   if (!boundary.properties.id) throw new Error('Missing id on write')
   const fileName = path.join(writePath, `${boundary.properties.id}.geojson`)
-  fs.exists(fileName, (err, exists) => {
-    if (exists) console.warn('Overwriting', fileName, boundary)
-    const str = JSON.stringify(boundary)
-    writeAOF(boundary.properties.id, str)
-    fs.writeFile(fileName, str, cb)
+
+  loadCustom(boundary.properties.id, (err, custom) => {
+    fs.exists(fileName, (err, exists) => {
+      if (custom) {
+        // just write the aof
+        writeAOF(custom.properties.id, JSON.stringify(custom))
+        return cb()
+      }
+      if (exists) console.warn('Overwriting', fileName, boundary)
+      const str = JSON.stringify(boundary)
+      writeAOF(boundary.properties.id, str)
+      fs.writeFile(fileName, str, cb)
+    })
   })
 }
 
