@@ -23,14 +23,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/contra/boundaries.git"
+    "url": "git+https://github.com/staeco/boundaries.git"
   },
   "author": "Contra <yo@contra.io> (http://contra.io)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/contra/boundaries/issues"
+    "url": "https://github.com/staeco/boundaries/issues"
   },
-  "homepage": "https://github.com/contra/boundaries#readme",
+  "homepage": "https://github.com/staeco/boundaries#readme",
   "files": [
     "files",
     "README.md",

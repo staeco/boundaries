@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="400" src="https://raw.githubusercontent.com/contra/boundaries/master/logos/black.png">
+  <img width="400" src="https://raw.githubusercontent.com/staeco/boundaries/master/logos/black.png">
 </p>
 
 
