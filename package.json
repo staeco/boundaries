@@ -25,7 +25,9 @@
     "type": "git",
     "url": "git+https://github.com/staeco/boundaries.git"
   },
-  "author": "Contra <yo@contra.io> (http://contra.io)",
+  "contributors": [
+    "Contra <yo@contra.io> (http://contra.io)"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/staeco/boundaries/issues"
