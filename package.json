@@ -26,7 +26,8 @@
     "url": "git+https://github.com/staeco/boundaries.git"
   },
   "contributors": [
-    "Contra <yo@contra.io> (http://contra.io)"
+    "Contra <yo@contra.io> (http://contra.io)",
+	"Steve Lacy <me@slacy.me> (https://slacy.me)"
   ],
   "license": "MIT",
   "bugs": {
@@ -52,10 +53,10 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.1",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-transform-runtime": "^6.4.3",
-    "babel-preset-es2015": "^6.3.13",
-    "babel-preset-stage-0": "^6.3.13",
+    "babel-plugin-add-module-exports": "^1.0.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "camelcase": "^5.0.0",
     "canada-boundaries": "^1.0.3",
     "census-boundaries": "^2.0.5",

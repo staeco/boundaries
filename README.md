@@ -100,6 +100,15 @@ ids.forEach((id) => {
 })
 ```
 
+
+### Updating the search results
+
+To update the results in `files.json`
+
+```
+go run main.go
+```
+
 [downloads-image]: http://img.shields.io/npm/dm/boundaries.svg
 [npm-url]: https://npmjs.org/package/boundaries
 [npm-image]: http://img.shields.io/npm/v/boundaries.svg

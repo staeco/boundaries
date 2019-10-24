@@ -1,0 +1,106 @@
+// #21AD92
+html, body, *
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+
+body
+  background-color: #01A980
+  font-size: 16px
+  font-family: 'Open Sans', sans-serif
+
+@mixin box
+  padding: 16px
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .2)
+  border-radius: 8px
+
+.loader
+  display: flex
+  color: #fff
+  justify-content: space-between
+  align-items: center
+  flex-direction: column
+  height: 250px
+  margin-top: 15vh
+
+.error
+  @include box
+  display: flex
+  width: 50%
+  margin: 32px auto
+  color: red
+  justify-content: center
+  align-items: center
+  background-color: #fff
+
+.app
+  display: flex
+  flex-direction: column
+  height: 100%
+
+.content
+  max-width: 700px
+  width: 100%
+  margin: 10vh auto
+  color: #fff
+  .logo
+    height: 150px
+    margin: 8px auto 16px
+    display: flex
+
+  .text
+    display: flex
+    justify-content: center
+    margin-top: 8px
+    .bold
+      font-weight: bold
+      margin-left: 8px
+
+  .input
+    @include box
+    width: 100%
+    border: none
+    background-color: #fff
+    color: #242424
+    font-size: 1.2rem
+    margin-top: 32px
+    margin-bottom: 16px
+  .result
+    @include box
+    display: flex
+    margin: 8px 0
+    background-color: #efefef
+    align-items: center
+    flex: 1
+    .rows
+      display: flex
+      flex: 1
+      max-width: calc(100% - 56px)
+      justify-content: space-between
+    .row
+      margin-right: 16px
+    .icon
+      margin-left: auto
+      padding-left: 16px
+
+.footer
+  background-color: #484848
+  display: flex
+  margin-top: auto
+  width: 100%
+  padding: 64px
+  color: #fff
+  justify-content: space-between
+  .logo
+    width: 120px
+  a
+   color: white
+
+a
+  text-decoration: none
+  color: #242424
+  display: inherit
+  width: inherit
+  flex: inherit
+  &:hover
+    text-decoration: underline
