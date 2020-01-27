@@ -1,5 +1,4 @@
 import censusImport from 'census-boundaries'
-import neighborhoodImport from 'neighborhood-boundaries'
 import canadaImport from 'canada-boundaries'
 import fs from 'graceful-fs'
 import path from 'path'
@@ -48,7 +47,7 @@ const getPolygon = (feature) => {
 
 const slugs = {}
 const getSlug = (str, attempt = 0) => {
-  const slug = slugify(attempt ? `${str} ${attempt}` : str, { lower: true }).replace('.', '')
+  const slug = slugify(attempt ? `${str} ${attempt}` : str, { lower: true }).replace(/[.()]/g, '')
   if (slugs[slug]) {
     ++attempt
     console.log('slug collision', slug)
@@ -164,26 +163,6 @@ const canada = (cb) => {
   })
 }
 
-const neighborhoods = (cb) => {
-  console.log('Fetching neighborhoods...')
-  neighborhoodImport({
-    onBoundary: (doc, donzo) => {
-      const data = getPolygon(doc)
-      const id = doc.properties.RegionID
-      if (!id) return donzo()
-      const name = doc.properties.Name
-      data.properties = {
-        id: getSlug(`usa ${doc.properties.State} ${doc.properties.City} ${name} neighborhood`),
-        type: 'neighborhood',
-        name,
-        code: id
-      }
-      write(data, donzo)
-    },
-    onFinish: cb
-  })
-}
-
 const countries = (cb) => {
   console.log('Fetching countries...')
   const writeCountry = (doc, enc, donzo) => {
@@ -226,4 +205,4 @@ const done = (err) => {
   logStream.end()
 }
 
-async.series([ planets, countries, neighborhoods, america, canada ], done)
+async.series([ planets, countries, america, canada ], done)
