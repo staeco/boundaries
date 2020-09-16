@@ -23,7 +23,7 @@ export default class App extends PureComponent {
     search: ''
   }
   componentDidMount = () => {
-    fetch('https://raw.githubusercontent.com/stevelacy/boundaries.search/master/list.json')
+    fetch('https://raw.githubusercontent.com/staeco/boundaries/master/list.json')
       .then((res) => res.json())
       .then((data) =>
         this.setState({ data, loading: false })
@@ -105,7 +105,7 @@ export default class App extends PureComponent {
         <input
           className="input"
           autoFocus
-          placeholder="search boundaries (nyc, new york, etc...)"
+          placeholder="Search Boundaries (nyc, new york, etc...)"
           type="text"
           value={this.state.search}
           onChange={this.onSearch} />
