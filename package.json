@@ -47,7 +47,7 @@
     "update": "mkdir -p files tile38 && NODE_OPTIONS=--max_old_space_size=16000 DEBUG=census babel-node update && npm run neighborhoods && cp custom/*.geojson files && npm run compress",
     "neighborhoods": "for i in zillow-neighborhoods/*.geojson; do cp '$i' ./files; done",
     "compress": "GZIP=-9 tar -czvf tile38.tar.gz tile38/commands.log && rm -rf tile38",
-    "build-site": "go run main.go"
+    "build-site": "go run main.go && cd site && yarn build && cd .."
   },
   "devDependencies": {
     "JSONStream": "^1.3.2",
