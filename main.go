@@ -11,6 +11,7 @@ import (
 )
 
 var src = "./files/"
+var custom = "./custom/"
 var dst = "/files"
 
 var out = "./list.json"
@@ -27,6 +28,12 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	custom, err := ioutil.ReadDir(custom)
+	if err != nil {
+		panic(err)
+	}
+	files = append(files, custom...)
+
 	var results []Result
 	for _, f := range files {
 		file, err := os.Open(fmt.Sprintf("%s/%s", src, f.Name()))
