@@ -27,3 +27,4 @@ coverage
 sandbox
 yarn.lock
 .cache
+.parcel-cache
